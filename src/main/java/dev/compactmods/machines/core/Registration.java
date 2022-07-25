@@ -1,6 +1,7 @@
 package dev.compactmods.machines.core;
 
 import java.util.function.Supplier;
+
 import dev.compactmods.machines.CompactMachines;
 import static dev.compactmods.machines.CompactMachines.MOD_ID;
 import dev.compactmods.machines.machine.CompactMachineBlock;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,7 +41,6 @@ public class Registration {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MOD_ID);
-
 
     // ================================================================================================================
     //   PROPERTIES
@@ -129,6 +130,7 @@ public class Registration {
     // ================================================================================================================
     public static final RegistryObject<Block> BLOCK_MACHINE_VOID_AIR = BLOCKS.register("machine_void_air", () ->
             new MachineVoidAir());
+
 
     // ================================================================================================================
     //   DIMENSION
