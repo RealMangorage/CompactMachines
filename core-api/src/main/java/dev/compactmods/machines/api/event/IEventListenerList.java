@@ -9,5 +9,11 @@ import java.util.stream.Stream;
  */
 public interface IEventListenerList<B> {
     void addListener(B listener);
+
+    default <E extends B> void addListener(Class<E> eClass, E listener) {
+        addListener(listener);
+    }
+
     Stream<B> getListeners();
+
 }

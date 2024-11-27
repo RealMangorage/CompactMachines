@@ -50,8 +50,7 @@ public class TreeCutterUpgrade implements RoomUpgrade {
 
     @Override
     public void gatherEvents(IEventListenerList<RoomUpgradeEvent> listenerList) {
-        final UpgradeTickedEventListener ticker = TreeCutterUpgrade::onTick;
-        listenerList.addListener(ticker);
+        listenerList.addListener(UpgradeTickedEventListener.class, TreeCutterUpgrade::onTick);
     }
 
     @Override
