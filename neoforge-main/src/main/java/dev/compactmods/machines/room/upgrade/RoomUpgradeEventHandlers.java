@@ -3,7 +3,10 @@ package dev.compactmods.machines.room.upgrade;
 import dev.compactmods.machines.CompactMachinesCommon;
 import dev.compactmods.machines.api.CompactMachines;
 import dev.compactmods.machines.api.dimension.CompactDimension;
+import dev.compactmods.machines.api.event.IEventListenerList;
+import dev.compactmods.machines.api.room.upgrade.events.RoomUpgradeEvent;
 import dev.compactmods.machines.api.room.upgrade.events.lifecycle.UpgradeTickedEventListener;
+import dev.compactmods.machines.event.EventListenerList;
 import dev.compactmods.machines.feature.CMFeatureFlags;
 import dev.compactmods.machines.room.Rooms;
 import net.minecraft.network.chat.Component;
@@ -38,13 +41,15 @@ public class RoomUpgradeEventHandlers {
 
 				   for (final var upgradeStack : upgradeStacks) {
 					  final var upgrades = upgradeStack.get(RoomUpgrades.UPGRADE_LIST_COMPONENT);
+					  final IEventListenerList<RoomUpgradeEvent> listenerList = EventListenerList.createList();
 					  upgrades.upgrades()
-						  .stream()
-						  .flatMap(ru -> ru.gatherEvents().filter(UpgradeTickedEventListener.class::isInstance))
-						  .map(UpgradeTickedEventListener.class::cast)
-						  .forEach(ticker -> {
-							 ticker.handle(serverLevel, room, upgradeStack);
-						  });
+							  .forEach(upgrade -> upgrade.gatherEvents(listenerList));
+					  listenerList.getListeners()
+							  .filter(UpgradeTickedEventListener.class::isInstance)
+							  .map(UpgradeTickedEventListener.class::cast)
+							  .forEach(ticker -> {
+								  ticker.handle(serverLevel, room, upgradeStack);
+							  });
 				   }
 				});
 		 }

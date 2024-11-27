@@ -1,6 +1,7 @@
 package dev.compactmods.machines.room.upgrade.example;
 
 import com.mojang.serialization.MapCodec;
+import dev.compactmods.machines.api.event.IEventListenerList;
 import dev.compactmods.machines.api.room.RoomInstance;
 import dev.compactmods.machines.api.room.upgrade.RoomUpgrade;
 import dev.compactmods.machines.api.room.upgrade.RoomUpgradeType;
@@ -48,9 +49,9 @@ public class TreeCutterUpgrade implements RoomUpgrade {
     }
 
     @Override
-    public Stream<RoomUpgradeEvent> gatherEvents() {
+    public void gatherEvents(IEventListenerList<RoomUpgradeEvent> listenerList) {
         final UpgradeTickedEventListener ticker = TreeCutterUpgrade::onTick;
-        return Stream.of(ticker);
+        listenerList.addListener(ticker);
     }
 
     @Override
