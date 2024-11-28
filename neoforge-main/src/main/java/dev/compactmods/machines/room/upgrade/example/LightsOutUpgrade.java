@@ -1,5 +1,6 @@
 package dev.compactmods.machines.room.upgrade.example;
 
+import com.mojang.serialization.MapCodec;
 import dev.compactmods.machines.api.CompactMachines;
 import dev.compactmods.machines.api.dimension.CompactDimension;
 import dev.compactmods.machines.api.room.RoomInstance;
@@ -24,6 +25,8 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class LightsOutUpgrade implements RoomUpgrade {
+    public static final MapCodec<LightsOutUpgrade> CODEC = MapCodec.unit(LightsOutUpgrade::new);
+
     @Override
     public RoomUpgradeType<?> getType() {
         return RoomUpgrades.LIGHTS_OUT_UPGRADE.get();

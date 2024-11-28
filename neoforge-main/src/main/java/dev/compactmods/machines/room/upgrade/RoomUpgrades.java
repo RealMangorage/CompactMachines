@@ -33,7 +33,7 @@ public interface RoomUpgrades {
               .build());
 
   DeferredHolder<RoomUpgradeType<?>, RoomUpgradeType<LightsOutUpgrade>> LIGHTS_OUT_UPGRADE = ROOM_UPGRADE_DEFINITIONS
-          .register("lights_out", () -> RoomUpgradeType.builder(LightsOutUpgrade::new, MapCodec.unit(LightsOutUpgrade::new))
+          .register("lights_out", () -> RoomUpgradeType.builder(LightsOutUpgrade::new, LightsOutUpgrade.CODEC)
                   .requiredFeatures(CMFeatureFlags.ROOM_UPGRADES)
                   .itemPredicate(stack -> stack.is(Items.REDSTONE_LAMP) || stack.is(Items.COPPER_BULB))
                   .build());
